@@ -1,0 +1,11 @@
+{"message":"API server listening on host ::, port 3000!","level":"info"}
+{"message":"Redis database connection successful","level":"info"}
+{"command":"SCRIPT","args":["LOAD","local msg = redis.call( \"keys\", \"q:jobs:*:inactive\" )\n        local need_fix = 0\n        for i,v in ipairs(msg) do\n          local queue = redis.call( \"zcard\", v )\n          local jt = string.match(v, \"q:jobs:(.*):inactive\")\n          local pending = redis.call( \"LLEN\", \"q:\" .. jt .. \":jobs\" )\n          if queue > pending then\n            need_fix = need_fix + 1\n            for j=1,(queue-pending) do\n              redis.call( \"lpush\", \"q:\"..jt..\":jobs\", 1 )\n            end\n          end\n        end\n        return need_fix"],"code":"ERR","level":"error","message":"Queue Error... ERR unknown command 'script'","stack":"ReplyError: ERR unknown command 'script'\n    at parseError (C:\\Users\\Admin\\Desktop\\new_proj\\com.myproject.server\\node_modules\\redis-parser\\lib\\parser.js:193:12)\n    at parseType (C:\\Users\\Admin\\Desktop\\new_proj\\com.myproject.server\\node_modules\\redis-parser\\lib\\parser.js:303:14)"}
+{"message":"sysMongoDB database connection successful","level":"info"}
+{"message":"mongodb://localhost:27017/milk-test","level":"info"}
+{"message":"logMongoDB database connection successful","level":"info"}
+{"message":"mongodb://localhost:27017/milk-log","level":"info"}
+{"message":"etlMongoDB database connection successful","level":"info"}
+{"message":"mongodb://localhost:27017/milk-etl","level":"info"}
+{"message":"arcMongoDB database connection successful","level":"info"}
+{"message":"mongodb://localhost:27017/milk-arc","level":"info"}

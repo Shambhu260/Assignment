@@ -1,0 +1,3 @@
+C:\SHAMBHU_WORK\CHANGES_LETEST_PROJECT\mapalontech-codev2\com.myparcelguru.server\obj\Debug\com.myparcelguru.server.njsprojAssemblyReference.cache
+C:\SHAMBHU_WORK\CHANGES_LETEST_PROJECT\mapalontech-codev2\com.myparcelguru.server\obj\Debug\com.myparcelguru.server.njsproj.CoreCompileInputs.cache
+C:\SHAMBHU_WORK\CHANGES_LETEST_PROJECT\mapalontech-codev2\com.myparcelguru.server\bin\Microsoft.NodejsTools.WebRole.dll
