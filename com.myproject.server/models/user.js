@@ -3,7 +3,6 @@ const { Schema } = require('mongoose');
 const collection = 'user';
 const debug = require('debug')(collection);
 const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
 
 const schema = new Schema({
     id: {
@@ -26,16 +25,14 @@ const schema = new Schema({
     phone: {
         type: String,
         default: "",
-        required: false,
+        required: true,
     },
     profileImg: {
         type: String,
         default: "",
-        required: false,
+        required: true,
     },
 }, {
     timestamps: true
 });
-schema.plugin(mongoosePaginate);
-
 module.exports = database.model("user", schema);

@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from "@angular/common/http";
 import { TaskComponent } from './task/task.component';
-import { UserlistComponent } from './userlist/userlist.component';
+import { ProductComponent } from './product/product.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
-    UserlistComponent
+    ProductComponent,
+
   ],
   imports: [
     BrowserModule,

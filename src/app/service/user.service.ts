@@ -11,28 +11,46 @@ http:HttpClient;
     this.http= https;
    }
 
-   createUser(user: any){
-    return this.http.post(`${this.apiUrl}/user/create`, user);
+   createCategory(category: any){
+    return this.http.post(`${this.apiUrl}/category/create`, category);
+   }
+   createProduct(product: any){
+    return this.http.post(`${this.apiUrl}/product/create`, product);
    }
 
-   getUser(){
-    return this.http.get(`${this.apiUrl}/user/search`);
+   getCategory(){
+    return this.http.get(`${this.apiUrl}/category/search`);
+   }
+   getproduct(){
+    return this.http.get(`${this.apiUrl}/product/search`);
    }
 
-   deleteUser(id: any) {
-    return this.http.delete(`${this.apiUrl}/user/deleteJob_details/` + id);
+   deleteCategory(id: any) {
+    return this.http.delete(`${this.apiUrl}/category/deleteJob_details/` + id);
+  }
+  deleteproduct(id: any) {
+    return this.http.delete(`${this.apiUrl}/product/deleteProduct/` + id);
   }
 
-   updateUser(id: string, firstName: any, lastName: any, email: any, phone:any, profileImg:any) {
+  updateUser(id: string, CategoryId: any, categoryName: any) {
     let requestData = {
       id: id,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone:phone,
-      profileImg:profileImg
+      CategoryId: CategoryId,
+      categoryName: categoryName,
     }
-    return this.http.put(`${this.apiUrl}/user/updateUser/` + id, requestData);
+    return this.http.put(`${this.apiUrl}/category/updateCategory/` + id, requestData);
+  }
+  updateProduct(id: string, productId: any, productName: any, supportedCategory: any) {
+    let requestData = {
+      id: id,
+      productId: productId,
+      productName: productName,
+      supportedCategory: supportedCategory
+    }
+    return this.http.put(`${this.apiUrl}/product/updateProduct/` + id, requestData);
+  }
+  getCateryAndProductInfoWithProudctId(id: any) {
+    return this.http.get(`${this.apiUrl}/category/categoryWithProductId/` + id);
   }
 
 

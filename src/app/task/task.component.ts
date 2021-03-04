@@ -10,37 +10,29 @@ import {FormsModule,FormControl,FormControlName,FormBuilder,FormGroup,Validators
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  email: any;
-  photo: any;
-  last: any;
-  name: any;
+  CategoryId: any;
+  categoryName: any;
+  category: any  = {} as any;
+    userService: UserService;
+   categories: any;
+   updateButton: boolean= false;
 
-  phone: number=0;
-  number: number = 0;
-  n1:number = 0;
-  user: any = {} as any;
-  userService: UserService;
-  users: any;
-  updateButton: boolean= false;
 
-  constructor(Userservice:UserService) {
-    this.userService=Userservice;
+  constructor(Userservice: UserService) {
+    this.userService = Userservice;
   }
 
   form = new FormGroup({
-    name:new FormControl('',[Validators.requiredTrue]),
-    last:new FormControl('',[Validators.requiredTrue]),
-    photo:new FormControl('',[Validators.requiredTrue]),
-    phone:new FormControl('',[Validators.requiredTrue]),
-    email: new FormControl('', [Validators.requiredTrue])
+    CategoryId: new FormControl('',  [Validators.requiredTrue]),
+    categoryName: new FormControl('', [Validators.requiredTrue]),
   });
 
   ngOnInit() {
 
-    this.userService.getUser().subscribe(
+    this.userService.getCategory().subscribe(
       (data:any) => {
-         this.users = data.category.docs
-         console.log(this.users);
+         this.categories = data.category.docs
+         console.log(this.categories);
       },
       (error:any) => {
         console.log(error);
@@ -49,21 +41,15 @@ export class TaskComponent implements OnInit {
 
   }
 
-submit(){
-  this.name ='';
-  this.last ='';
-  this.photo ='';
-  this.email = '';
+submit() {
+  this.CategoryId = '';
+  this.categoryName =  '';
 
-  this.user.firstName = this.form.get('name')?.value;
-  this.user.lastName = this.form.get('last')?.value;
-  this.user.profileImg = this.form.get('photo')?.value;
-  this.user.phone  = this.form.get('phone')?.value;
-  this.user.email = this.form.get('email')?.value;
-
-this.userService.createUser(this.user).subscribe(
+  this.category.CategoryId = this.form.get('CategoryId')?.value;
+  this.category.categoryName = this.form.get('categoryName')?.value;
+this.userService.createCategory(this.category).subscribe(
   (data:any) => {
-    console.log(this.user);
+    console.log(this.category);
     this.ngOnInit();
   },
   (error:any) => {
@@ -75,38 +61,31 @@ this.userService.createUser(this.user).subscribe(
 
 }
 
-delete(user: any){
-
-
-  this.userService.deleteUser(user._id).subscribe(
-    (data:any) => {
+delete (category: any) {
+  this.userService.deleteCategory(category._id).subscribe(
+    (data: any) => {
       this.ngOnInit();
     },
-    (error)=>{
-      console.log("error in deletion"+error)
+    (error) => {
+      console.log('error in deletion' + error);
 
     }
   );
 
 }
 
-getUser(user:any){
-  this.user.id = user._id;
-  this.form.controls.name.setValue(user.firstName)
-  this.form.controls.last.setValue(user.lastName)
-  this.form.controls.phone .setValue(user.phone)
-  this.form.controls.photo .setValue(user.photo)
-  this.form.controls.email .setValue(user.email)
+getUser (category:any){
+  this.category.id = category._id;
+  this.form.controls.CategoryId.setValue(category.CategoryId);
+  this.form.controls.categoryName.setValue(category.categoryName);
   this.updateButton=true;
 }
 
-update(user: any){
-  this.user.firstName = this.form.get('name')?.value;
-  this.user.lastName = this.form.get('last')?.value;
-  this.user.email = this.form.get('email')?.value;
-  this.user.phone  = this.form.get('phone')?.value;
-  this.user.profileImg = this.form.get('photo')?.value;
-  this.userService.updateUser(user.id, this.user.firstName, this.user.lastName,this.user.email, this.user.phone, this.user.profileImg,).subscribe(
+update (category: any) {
+  this.category.CategoryId = this.form.get('CategoryId')?.value;
+  this.category.categoryName = this.form.get('categoryName')?.value;
+
+  this.userService.updateUser(category.id, this.category.CategoryId, this.category.categoryName).subscribe(
     (data:any) => {
       this.ngOnInit();
     },
